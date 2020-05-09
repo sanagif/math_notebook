@@ -1,23 +1,82 @@
-\documentclass[a4paper]{jsarticle}
-%
+\documentclass[a4paper,dvipdfmx]{jsarticle}
+
+%基本パッケージ
 \usepackage{amsmath,amssymb}
 \usepackage{bm}
 \usepackage{graphicx}
 \usepackage{ascmac}
-%
+\usepackage{amsthm}
+
+%定理等を資格で囲む
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
 \setlength{\textwidth}{\fullwidth}
 \setlength{\textheight}{39\baselineskip}
 \addtolength{\textheight}{\topskip}
 \setlength{\voffset}{-0.5in}
 \setlength{\headsep}{0.3in}
 
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem*{theorem*}{定理}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem*{definition*}{定義}
+
+%独自ショートカット
+\newcommand{\Bee}{\mathfrak{B}}
+\newcommand{\R}{\mathbb{R}}
+
 \pagestyle{myheadings}
-\markright{\footnotesize \sf sanagif}
+\markright{\footnotesize \sf sanagifの勉強ノート \ \texttt{https://github.com/sanagif/math\_notebook}}
+
+\title{ルベーグ積分まとめ(執筆中)}
 
 \begin{document}
 
-\section*{Title}
+\maketitle
 
-Test 日本語
+\section*{はじめに}
+伊藤清三先生の「Lebesgue積分入門(新装版)」で個人的に勉強したことをまとめました.
+集合に関する基礎的な知識のみを前提として,Lebesugue積分の定義までを説明します.
+ご指摘がある場合は,Githubアカウントの@sanagifまでご連絡ください.
 
+\section{基礎: 可測空間,可測関数}
+\begin{tcolorbox}
+\begin{definition}
+    集合$X$の部分集合からなる集合族$\Bee$が\textbf{$\sigma$-加法族}であるとは次の条件を満たすことである.
+\begin{align}
+    &\phi \in \Bee \\
+    &E \in \Bee ならば E^c \in \Bee \\
+    &E_n \in \Bee (n = 1, 2, \cdots) ならば \bigcup_{n=1}^{\infty} E_n \in \Bee
+\end{align}
+$\sigma$-加法族は\textbf{完全加法族}ともいう.
+集合$X$と$X$上の加法族$\Bee$の組$(X,\Bee)$を\textbf{可測空間}と呼ぶ.
+\end{definition}
+\end{tcolorbox}
+
+\par
+
+可測空間$(X,\Bee)$を考える.
+1つの集合$E \in \Bee$を固定する.
+写像$f: E \to \R \cup \{+\infty, -\infty\}$と実数$a$に対して次のような記法を採用する.
+\begin{align}
+    E(f < a) = \{ x \in E \mid f(x) < a\}
+\end{align}
+同様に
+\begin{align}
+    E(f \le a) = \{ x \in E \mid f(x) \le a\} \\
+    E(f = a) = \{ x \in E \mid f(x) = a\} \\
+    E(a < f \le b) = \{ x \in E \mid a < f(x) \le a\}
+\end{align}
+などと定義する.
+
+\begin{tcolorbox}
+\begin{definition}
+    可測空間$(X,\Bee)$と1つの集合$E \in \Bee$に対して,
+    写像$f: E \to \R \cup \{+\infty, -\infty\}$が\textbf{可測関数}であるとは,任意の実数$a$に対して,
+    $E(f < a) \in \Bee$を満たすことである.
+\end{definition}
+\end{tcolorbox}
 \end{document}

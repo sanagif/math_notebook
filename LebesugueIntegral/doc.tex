@@ -11,6 +11,9 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable, skins, theorems}
 
+%脚注の形式を定義
+\renewcommand\thefootnote{\arabic{footnote})}
+
 \setlength{\textwidth}{\fullwidth}
 \setlength{\textheight}{39\baselineskip}
 \addtolength{\textheight}{\topskip}
@@ -27,11 +30,14 @@
 %独自ショートカット
 \newcommand{\Bee}{\mathfrak{B}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\RR}{\overline{\mathbb{R}}}
 
 \pagestyle{myheadings}
 \markright{\footnotesize \sf sanagifの勉強ノート \ \texttt{https://github.com/sanagif/math\_notebook}}
 
 \title{ルベーグ積分まとめ(執筆中)}
+\author{sanagif}
+\date{\today}
 
 \begin{document}
 
@@ -42,16 +48,28 @@
 集合に関する基礎的な知識のみを前提として,Lebesugue積分の定義までを説明します.
 ご指摘がある場合は,Githubアカウントの@sanagifまでご連絡ください.
 
+\section{記号の定義}
+集合$X$の部分集合$E$に対して,定義関数を$\chi_{E}$で表す.すなわち,
+\begin{align}
+    \chi_{E}(x) =
+    \begin{cases}
+        1 & (x \in E) \\
+        0 & (x \in E^c)
+    \end{cases}\notag
+\end{align}.
+\par
+
+実数全体の集合$\R$に$+\infty,-\infty$を付加したものを$\RR$と表す.
+すなわち$\RR = \R \cup \{+\infty, -\infty\}$.
 \section{基礎: 可測空間,可測関数}
 \begin{tcolorbox}
 \begin{definition}
-    集合$X$の部分集合からなる集合族$\Bee$が\textbf{$\sigma$-加法族}であるとは次の条件を満たすことである.
+    集合$X$の部分集合からなる集合族$\Bee$が\textbf{$\sigma$-加法族}または\textbf{完全加法族}であるとは次の条件を満たすことである.
 \begin{align}
     &\phi \in \Bee \\
     &E \in \Bee ならば E^c \in \Bee \\
     &E_n \in \Bee (n = 1, 2, \cdots) ならば \bigcup_{n=1}^{\infty} E_n \in \Bee
 \end{align}
-$\sigma$-加法族は\textbf{完全加法族}ともいう.
 集合$X$と$X$上の加法族$\Bee$の組$(X,\Bee)$を\textbf{可測空間}と呼ぶ.
 \end{definition}
 \end{tcolorbox}
@@ -76,7 +94,22 @@ $\sigma$-加法族は\textbf{完全加法族}ともいう.
 \begin{definition}
     可測空間$(X,\Bee)$と1つの集合$E \in \Bee$に対して,
     写像$f: E \to \R \cup \{+\infty, -\infty\}$が\textbf{可測関数}であるとは,任意の実数$a$に対して,
-    $E(f < a) \in \Bee$を満たすことである.
+    $E(f < a) \in \Bee$ \footnotemark を満たすことである.
 \end{definition}
 \end{tcolorbox}
+
+\begin{tcolorbox}
+\begin{definition}
+可測空間$(X,\Bee)$と1つの集合$E \in \Bee$に対して,
+    写像$f: E \to \R \cup \{+\infty, -\infty\}$が\textbf{単関数}あるいは\textbf{階段関数}であるとは,
+    集合$E$が$E = E_1 + E_2 + \cdots + E_n$と有限個の直和に表され,任意の$x \in E$に対して
+    \begin{align*}
+        f(x) = \sum_{i=1}^{\infty}\alpha_{i}\chi_{E_i}(x)
+    \end{align*}
+    が成立することを言う.
+    ただし,各$\alpha_{i}$は実数で$i \neq j$ならば$\alpha_{i} \neq \alpha_{j}$.
+\end{definition}
+\end{tcolorbox}
+
+\footnotetext{{$E(f \le a) \in \Bee, E(f > a) \in \Bee, E(f \ge a) \in \Bee$に置き換えても良い}}
 \end{document}
